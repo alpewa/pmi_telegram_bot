@@ -19,12 +19,12 @@ class Database:
             return self.cur.execute("INSERT INTO base VALUES (?, ?, ?, ?)", (snils, id, speciality, False,))
 
     # проверить наличие пользователя БД
-    def user_exists(self, id) -> bool:
+    def user_exists(self, id):
         result = self.cur.execute("SELECT id FROM base WHERE id = ?", (id,))
         return bool(len(result.fetchall()))
 
     # получить все строчку с подпиской
-    def get_subsriptions(self, status=True) -> list:
+    def get_sub(self, status=True):
         with self.con:
             return self.cur.execute("SELECT * FROM base WHERE sub = ?", (status,)).fetchall()
 
@@ -34,7 +34,7 @@ class Database:
             return self.cur.execute("UPDATE base SET sub = ? WHERE id = ?", (status, id,))
 
     # получить все строчки нужного пользователя
-    def get_info(self, id) -> list:
+    def get_info(self, id):
         result = self.cur.execute("SELECT * FROM base WHERE id = ?", (id,))
         return result.fetchall()
 
